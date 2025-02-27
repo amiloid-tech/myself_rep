@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабиринт</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Лабиринт</h1>
+    <button id="playButton" onclick="showMenu()">Играть</button>
+    <button id="authorsButton" onclick="showAuthors()">Об авторах</button>
+
+    <div id="menu" style="display:none;">
+        <h2>Выберите сложность:</h2>
+        <div>
+            <label for="rowsInput">Количество строк:</label>
+            <input type="number" id="rowsInput" value="10" min="5" max="30">
+        </div>
+        <div>
+            <label for="colsInput">Количество столбцов:</label>
+            <input type="number" id="colsInput" value="10" min="5" max="30">
+        </div>
+        <button onclick="startCustomGame()">Создать лабиринт</button>
+    </div>
+
+    <div id="authors" style="display:none;">
+        <h2>Авторы:</h2>
+        <p>Ваша игра разработана командой разработчиков. Спасибо за игру!</p>
+        <button onclick="hideAuthors()">Назад</button>
+    </div>
+
+    <div id="gameArea" style="display:none;">
+        <div id="maze"></div>
+        <button onclick="showHelp()">Помощь</button>
+        <p id="status"></p>
+    </div>
+
+    <script src="script.js"></script> 
+</body>
+</html>
