@@ -3,20 +3,20 @@
 #include <algorithm>
 #include <random>
 #include <chrono>
-#include <thread> // Для задержки
+#include <thread> 
 
 using namespace std;
 
-// Функция для вывода массива с задержкой
+
 void printArrayWithDelay(const vector<int>& arr, int delayMs) {
     for (int num : arr) {
         cout << num << " ";
     }
     cout << endl;
-    this_thread::sleep_for(chrono::milliseconds(delayMs)); // Задержка
+    this_thread::sleep_for(chrono::milliseconds(delayMs)); 
 }
 
-// Генерация случайного массива
+
 vector<int> generateRandomArray(int size) {
     vector<int> arr(size);
     random_device rd;
@@ -30,7 +30,7 @@ vector<int> generateRandomArray(int size) {
     return arr;
 }
 
-// Пузырьковая сортировка
+
 void bubbleSort(vector<int> arr, int delayMs) {
     int n = arr.size();
     bool swapped;
@@ -39,7 +39,7 @@ void bubbleSort(vector<int> arr, int delayMs) {
         for (int j = 0; j < n-i-1; ++j) {
             if (arr[j] > arr[j+1]) {
                 swap(arr[j], arr[j+1]);
-                printArrayWithDelay(arr, delayMs); // Вывод с задержкой
+                printArrayWithDelay(arr, delayMs); 
                 swapped = true;
             }
         }
@@ -47,7 +47,7 @@ void bubbleSort(vector<int> arr, int delayMs) {
     }
 }
 
-// Сортировка выбором
+
 void selectionSort(vector<int> arr, int delayMs) {
     int n = arr.size();
     for (int i = 0; i < n-1; ++i) {
@@ -57,12 +57,12 @@ void selectionSort(vector<int> arr, int delayMs) {
         }
         if (min_idx != i) {
             swap(arr[i], arr[min_idx]);
-            printArrayWithDelay(arr, delayMs); // Вывод с задержкой
+            printArrayWithDelay(arr, delayMs); 
         }
     }
 }
 
-// Сортировка вставками
+
 void insertionSort(vector<int> arr, int delayMs) {
     int n = arr.size();
     for (int i = 1; i < n; ++i) {
@@ -70,11 +70,11 @@ void insertionSort(vector<int> arr, int delayMs) {
         int j = i - 1;
         while (j >= 0 && arr[j] > key) {
             arr[j+1] = arr[j];
-            printArrayWithDelay(arr, delayMs); // Вывод с задержкой
+            printArrayWithDelay(arr, delayMs); 
             j--;
         }
         arr[j+1] = key;
-        printArrayWithDelay(arr, delayMs); // Вывод с задержкой
+        printArrayWithDelay(arr, delayMs);
     }
 }
 
@@ -86,7 +86,7 @@ int main() {
     vector<int> originalArray = generateRandomArray(size);
     
     cout << "\nИсходный массив:" << endl;
-    printArrayWithDelay(originalArray, 0); // Вывод без задержки
+    printArrayWithDelay(originalArray, 0); 
     
     cout << "\nВыберите метод сортировки:\n"
          << "1. Пузырьковая сортировка\n"
