@@ -1,11 +1,11 @@
 import pyautogui
 import time
 
-print("Автокликер запущен. Нажмите Ctrl+C для остановки.")
+print("РђРІС‚РѕРєР»РёРєРµСЂ Р·Р°РїСѓС‰РµРЅ. РќР°Р¶РјРёС‚Рµ Ctrl+C РґР»СЏ РѕСЃС‚Р°РЅРѕРІРєРё.")
 
 try:
     while True:
-        pyautogui.click()  # выполняем клик
-        time.sleep(1)  # задержка в 1 секунду между кликами
+        pyautogui.click()  
+        time.sleep(1)  
 except KeyboardInterrupt:
-    print("Автокликер остановлен.")
+    print("РђРІС‚РѕРєР»РёРєРµСЂ РѕСЃС‚Р°РЅРѕРІР»РµРЅ.")
