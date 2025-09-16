@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS // Отключаем предупреждения о небезопасных функциях
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,7 +10,6 @@
 #define MAX_INPUT_SIZE 256
 #define MAX_ARRAY_SIZE 100
 
-// Структура для хранения переменных
 typedef struct {
     char name[32];
     int value;
@@ -22,11 +21,11 @@ typedef struct {
 Variable variables[MAX_VARS];
 int var_count = 0;
 
-// Буфер для хранения кода
+
 char code_buffer[MAX_CODE_LINES][256];
 int code_lines = 0;
 
-// Поиск переменной по имени
+
 Variable* find_var(const char* name) {
     for (int i = 0; i < var_count; i++) {
         if (strcmp(variables[i].name, name) == 0) {
@@ -36,22 +35,21 @@ Variable* find_var(const char* name) {
     return NULL;
 }
 
-// Выполнение команды
 void execute_command(const char* command) {
     char cmd[32], arg1[128], arg2[128];
     sscanf(command, "%s %s %s", cmd, arg1, arg2);
 
     if (strcmp(cmd, "set") == 0) {
-        // Создание или обновление переменной
+       
         Variable* var = find_var(arg1);
         if (!var) {
             var = &variables[var_count++];
             strcpy(var->name, arg1);
-            var->is_array = false; // По умолчанию это не массив
+            var->is_array = false; 
         }
         var->value = atoi(arg2);
     } else if (strcmp(cmd, "arr") == 0) {
-        // Создание массива
+        
         Variable* var = find_var(arg1);
         if (!var) {
             var = &variables[var_count++];
@@ -60,14 +58,14 @@ void execute_command(const char* command) {
             var->array_size = 0;
         }
 
-        // Разделение элементов массива
+        
         char* token = strtok(arg2, ",");
         while (token != NULL && var->array_size < MAX_ARRAY_SIZE) {
             var->array[var->array_size++] = atoi(token);
             token = strtok(NULL, ",");
         }
     } else if (strcmp(cmd, "adarr") == 0) {
-        // Добавление элемента в массив
+       
         Variable* var = find_var(arg1);
         if (var && var->is_array && var->array_size < MAX_ARRAY_SIZE) {
             var->array[var->array_size++] = atoi(arg2);
@@ -75,7 +73,7 @@ void execute_command(const char* command) {
             printf("Error: Cannot add element to array %s\n", arg1);
         }
     } else if (strcmp(cmd, "suarr") == 0) {
-        // Удаление элемента из массива
+       
         Variable* var = find_var(arg1);
         if (var && var->is_array) {
             int value = atoi(arg2);
@@ -93,10 +91,10 @@ void execute_command(const char* command) {
         }
     } else if (strcmp(cmd, "print") == 0) {
         if (arg1[0] == '"') {
-            // Вывод текста
+            
             printf("%s\n", arg1 + 1);
         } else {
-            // Вывод переменной или массива
+          
             Variable* var = find_var(arg1);
             if (var) {
                 if (var->is_array) {
@@ -116,7 +114,7 @@ void execute_command(const char* command) {
             }
         }
     } else if (strcmp(cmd, "crun") == 0) {
-        // Ничего не делаем, так как "crun" обрабатывается отдельно
+        
     } else if (strcmp(cmd, "savef") == 0) {
         // Сохранение кода в файл
         FILE* file = fopen(arg1, "w");
@@ -130,7 +128,7 @@ void execute_command(const char* command) {
         fclose(file);
         printf("Code saved to %s\n", arg1);
     } else if (strcmp(cmd, "loadf") == 0) {
-        // Загрузка кода из файла
+        
         FILE* file = fopen(arg1, "r");
         if (!file) {
             printf("Error: Could not open file %s\n", arg1);
@@ -148,14 +146,14 @@ void execute_command(const char* command) {
     }
 }
 
-// Чтение и выполнение кода из буфера
+
 void execute_code() {
     for (int i = 0; i < code_lines; i++) {
         execute_command(code_buffer[i]);
     }
 }
 
-// Вывод меню
+
 void print_menu() {
     printf("Welcome to SOSI.C Development Environment!\n");
     printf("1. Launch Development Environment\n");
@@ -165,14 +163,14 @@ void print_menu() {
     printf("Choose an option: ");
 }
 
-// Вывод авторов
+
 void show_authors() {
     printf("Authors:\n");
     printf("- amiloid\n");
     printf("- faeris\n");
 }
 
-// Вывод синтаксиса и возможностей языка
+
 void show_syntax() {
     printf("SOSI.C Language Syntax and Features:\n");
     printf("- set x 10: Set variable x to 10\n");
@@ -187,16 +185,16 @@ void show_syntax() {
     printf("- loadf filename.sosi: Load code from file\n");
 }
 
-// Основная функция
+
 int main() {
     int choice;
     print_menu();
     scanf("%d", &choice);
-    getchar(); // Убираем символ новой строки после ввода числа
+    getchar(); 
 
     switch (choice) {
         case 1:
-            // Запуск среды разработки
+           
             break;
         case 2:
             show_authors();
@@ -208,7 +206,7 @@ int main() {
             char filename[256];
             printf("Enter file path (e.g., loadf filename.sosi): ");
             scanf("%s", filename);
-            execute_command(filename); // Загружаем файл
+            execute_command(filename);
             break;
         }
         default:
@@ -221,15 +219,15 @@ int main() {
     int current_line = 0;
     char input[MAX_INPUT_SIZE];
     while (1) {
-        // Вывод номера строки
+        
         printf("%d.   ", current_line + 1);
 
-        // Чтение ввода
+        
         if (fgets(input, sizeof(input), stdin)) {
-            input[strcspn(input, "\n")] = '\0'; // Убираем символ новой строки
+            input[strcspn(input, "\n")] = '\0'; 
 
             if (strcmp(input, "crun") == 0) {
-                // Выполнение кода
+               
                 printf("\nExecuting code...\n");
                 execute_code();
                 printf("\nWhat to do next?\n");
@@ -238,17 +236,17 @@ int main() {
                 printf("Choose an option: ");
                 int action;
                 scanf("%d", &action);
-                getchar(); // Убираем символ новой строки
+                getchar(); 
 
                 if (action == 2) {
                     char filename[256];
                     printf("Enter save command (e.g., savef filename.sosi): ");
                     scanf("%s", filename);
-                    execute_command(filename); // Сохраняем код
+                    execute_command(filename); 
                 }
                 break;
             } else {
-                // Сохранение строки в буфер
+                
                 if (current_line < MAX_CODE_LINES) {
                     strcpy(code_buffer[current_line], input);
                     if (current_line == code_lines) {
