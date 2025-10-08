@@ -1,0 +1,81 @@
+SOSI.C Interpreter — Документация
+=============================================
+
+Файлы:
+ - main.c
+ - io.c
+ - commands.c
+ - variables.c
+ - io.h
+ - commands.h
+ - variables.h
+ - Makefile
+
+Краткое описание:
+  - set var value
+  - arr name v1,v2,...
+  - adarr name x
+  - suarr name x
+  - print x    (или print "text")
+  - sloop N ... eloop
+  - savef filename
+  - loadf filename
+  - crun
+
+Глобальные структуры и переменные:
+ - Var
+     name     — имя переменной (строка)
+     value    — значение (int) для обычной переменной
+     isArray  — флаг массива (true/false)
+     arr[]    — элементы массива
+     arrSize  — количество элементов в массиве
+
+ - varList[MAXVARS] — массив Var (все переменные)
+ - varCount         — количество переменных
+
+ - codeBuffer[MAXLINES][256] — буфер строк кода
+ - codeLines                 — количество строк в буфере
+
+Основные функции:
+ - printmenu()
+     Печатает цветное главное меню.
+
+ - showauthors()
+     Печатает авторов проекта.
+
+ - showsyntax()
+     Показывает краткую справку по синтаксису.
+
+ - rundev()
+     Запускает среду разработки (ввод строк кода, подсветка).
+
+ - printcoloredline(line)
+     Печатает одну строку кода с минимальной подсветкой (ключевые слова, числа, строки).
+
+ - savecode(filename) / loadcode(filename)
+     Сохраняют/загружают буфер codeBuffer в файл.
+
+ - execcmd(line)
+     Выполняет команду savef/ loadf, используемую прямо из меню или кода.
+
+ - execline(line)
+     Выполняет одну строку интерпретируемого кода: set, print, arr, adarr, suarr.
+
+ - execcode()
+     Выполняет весь буфер codeBuffer; поддерживает блоки sloop N ... eloop.
+
+ - findvar(name), setvar(name,value), makearr(name,values), addarr(name,value), delarr(name,value), printvar(name)
+     Операции с переменными и массивами.
+
+Примеры команд:
+ set x 10
+ arr nums 1,2,3
+ adarr nums 4
+ print x
+ print nums
+ sloop 3
+   print "hello"
+ eloop
+ savef test.sosi
+ loadf test.sosi
+ crun
