@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мини-игры</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+    <!-- Главный экран -->
+    <div id="main-screen" class="screen active">
+        <header>
+            <h1>Мини-игры</h1>
+            <p class="subtitle">Выберите игру и начинайте играть!</p>
+        </header>
+
+        <div class="games-grid">
+            <!-- Змейка -->
+            <div class="game-preview" data-game="snake">
+                <div class="preview-canvas">
+                    <canvas id="snake-preview" width="200" height="200"></canvas>
+                </div>
+                <div class="preview-info">
+                    <h3>Змейка</h3>
+                    <p>Классическая игра</p>
+                    <div class="preview-score">Рекорд: <span id="snake-preview-score">0</span></div>
+                </div>
+            </div>
+
+            <!-- Doodle Jump -->
+            <div class="game-preview" data-game="doodle">
+                <div class="preview-canvas">
+                    <canvas id="doodle-preview" width="200" height="300"></canvas>
+                </div>
+                <div class="preview-info">
+                    <h3>Doodle Jump</h3>
+                    <p>Прыгай выше!</p>
+                    <div class="preview-score">Рекорд: <span id="doodle-preview-score">0</span></div>
+                </div>
+            </div>
+
+            <!-- Сапёр -->
+            <div class="game-preview" data-game="minesweeper">
+                <div class="preview-canvas">
+                    <canvas id="minesweeper-preview" width="200" height="200"></canvas>
+                </div>
+                <div class="preview-info">
+                    <h3>Сапёр</h3>
+                    <p>Найди все мины!</p>
+                    <div class="preview-score">Рекорд: <span id="minesweeper-preview-score">0</span></div>
+                </div>
+            </div>
+
+            <!-- Тетрис -->
+            <div class="game-preview" data-game="tetris">
+                <div class="preview-canvas">
+                    <canvas id="tetris-preview" width="200" height="300"></canvas>
+                </div>
+                <div class="preview-info">
+                    <h3>Тетрис</h3>
+                    <p>Собирай линии!</p>
+                    <div class="preview-score">Рекорд: <span id="tetris-preview-score">0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h2>Как играть?</h2>
+            <ul>
+                <li><strong>Змейка:</strong> Стрелки ← ↑ → ↓ для управления</li>
+                <li><strong>Doodle Jump:</strong> Стрелки ← → для движения</li>
+                <li><strong>Сапёр:</strong> ЛКМ - открыть, ПКМ - флажок</li>
+                <li><strong>Тетрис:</strong> Стрелки ← → ↓, ↑ - поворот</li>
+                <li>Нажмите на превью игры чтобы начать играть</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Экран Змейки -->
+    <div id="snake-screen" class="screen">
+        <div class="game-header">
+            <button class="back-button" onclick="gameManager.showMainScreen()">← Назад</button>
+            <h2>Змейка</h2>
+            <div class="game-scores">
+                <div class="score">Счет: <span id="snake-score">0</span></div>
+                <div class="score">Рекорд: <span id="snake-high-score">0</span></div>
+            </div>
+        </div>
+
+        <div class="game-container">
+            <div class="game-area" id="snake-game">
+                <canvas id="snake-canvas" width="400" height="400"></canvas>
+                <div class="game-over" id="snake-game-over">
+                    <h2>Игра окончена!</h2>
+                    <p>Ваш счет: <span id="snake-final-score">0</span></p>
+                    <button onclick="gameManager.resetGame('snake')">Играть снова</button>
+                </div>
+            </div>
+            
+            <div class="game-controls">
+                <div class="controls-info">Управление: стрелки ← ↑ → ↓</div>
+                <div class="buttons">
+                    <button onclick="gameManager.startGame('snake')">Старт</button>
+                    <button onclick="gameManager.pauseGame('snake')">Пауза</button>
+                    <button onclick="gameManager.resetGame('snake')">Заново</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Экран Doodle Jump -->
+    <div id="doodle-screen" class="screen">
+        <div class="game-header">
+            <button class="back-button" onclick="gameManager.showMainScreen()">← Назад</button>
+            <h2>Doodle Jump</h2>
+            <div class="game-scores">
+                <div class="score">Счет: <span id="doodle-score">0</span></div>
+                <div class="score">Рекорд: <span id="doodle-high-score">0</span></div>
+            </div>
+        </div>
+
+        <div class="game-container">
+            <div class="game-area" id="doodle-game">
+                <canvas id="doodle-canvas" width="400" height="600"></canvas>
+                <div class="game-over" id="doodle-game-over">
+                    <h2>Игра окончена!</h2>
+                    <p>Ваш счет: <span id="doodle-final-score">0</span></p>
+                    <button onclick="gameManager.resetGame('doodle')">Играть снова</button>
+                </div>
+            </div>
+            
+            <div class="game-controls">
+                <div class="controls-info">Управление: стрелки ← →</div>
+                <div class="buttons">
+                    <button onclick="gameManager.startGame('doodle')">Старт</button>
+                    <button onclick="gameManager.pauseGame('doodle')">Пауза</button>
+                    <button onclick="gameManager.resetGame('doodle')">Заново</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Экран Сапёра -->
+    <div id="minesweeper-screen" class="screen">
+        <div class="game-header">
+            <button class="back-button" onclick="gameManager.showMainScreen()">← Назад</button>
+            <h2>Сапёр</h2>
+            <div class="game-scores">
+                <div class="score">Время: <span id="minesweeper-time">0</span></div>
+                <div class="score">Мины: <span id="minesweeper-mines">10</span></div>
+                <div class="score">Рекорд: <span id="minesweeper-high-score">0</span></div>
+            </div>
+        </div>
+
+        <div class="game-container">
+            <div class="game-area" id="minesweeper-game">
+                <canvas id="minesweeper-canvas" width="400" height="400"></canvas>
+                <div class="game-over" id="minesweeper-game-over">
+                    <h2>Игра окончена!</h2>
+                    <p>Время: <span id="minesweeper-final-time">0</span> сек</p>
+                    <button onclick="gameManager.resetGame('minesweeper')">Играть снова</button>
+                </div>
+                <div class="game-won" id="minesweeper-game-won">
+                    <h2>Победа!</h2>
+                    <p>Время: <span id="minesweeper-win-time">0</span> сек</p>
+                    <button onclick="gameManager.resetGame('minesweeper')">Играть снова</button>
+                </div>
+            </div>
+            
+            <div class="game-controls">
+                <div class="controls-info">Управление: ЛКМ - открыть, ПКМ - флажок</div>
+                <div class="difficulty-buttons">
+                    <button onclick="minesweeperGame.setDifficulty('beginner')">Новичок</button>
+                    <button onclick="minesweeperGame.setDifficulty('intermediate')">Любитель</button>
+                    <button onclick="minesweeperGame.setDifficulty('expert')">Эксперт</button>
+                </div>
+                <div class="buttons">
+                    <button onclick="gameManager.startGame('minesweeper')">Старт</button>
+                    <button onclick="gameManager.resetGame('minesweeper')">Заново</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Экран Тетриса -->
+    <div id="tetris-screen" class="screen">
+        <div class="game-header">
+            <button class="back-button" onclick="gameManager.showMainScreen()">← Назад</button>
+            <h2>Тетрис</h2>
+            <div class="game-scores">
+                <div class="score">Счет: <span id="tetris-score">0</span></div>
+                <div class="score">Линии: <span id="tetris-lines">0</span></div>
+                <div class="score">Рекорд: <span id="tetris-high-score">0</span></div>
+            </div>
+        </div>
+
+        <div class="game-container">
+            <div class="tetris-layout">
+                <div class="game-area" id="tetris-game">
+                    <canvas id="tetris-canvas" width="300" height="600"></canvas>
+                    <div class="game-over" id="tetris-game-over">
+                        <h2>Игра окончена!</h2>
+                        <p>Ваш счет: <span id="tetris-final-score">0</span></p>
+                        <button onclick="gameManager.resetGame('tetris')">Играть снова</button>
+                    </div>
+                </div>
+                
+                <div class="game-sidebar">
+                    <div class="next-piece">
+                        <h3>Следующая:</h3>
+                        <canvas id="tetris-next-canvas" width="100" height="100"></canvas>
+                    </div>
+                    <div class="game-info">
+                        <div class="info-item">Уровень: <span id="tetris-level">1</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-controls">
+                <div class="controls-info">Управление: ← → ↓ движение, ↑ поворот, Пробел - пауза</div>
+                <div class="buttons">
+                    <button onclick="gameManager.startGame('tetris')">Старт</button>
+                    <button onclick="gameManager.pauseGame('tetris')">Пауза</button>
+                    <button onclick="gameManager.resetGame('tetris')">Заново</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/game-manager.js"></script>
+    <script src="js/snake/snake.js"></script>
+    <script src="js/snake/snake-game.js"></script>
+    <script src="js/doodle/doodle.js"></script>
+    <script src="js/doodle/doodle-game.js"></script>
+    <script src="js/minesweeper/minesweeper.js"></script>
+    <script src="js/minesweeper/minesweeper-game.js"></script>
+    <script src="js/tetris/tetris.js"></script>
+    <script src="js/tetris/tetris-game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
