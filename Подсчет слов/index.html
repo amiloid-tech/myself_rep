@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Текст Анализатор Pro | Анализ слов, символов и многое другое</title>
+    <meta name="description" content="Бесплатный онлайн анализатор текста. Подсчет слов, символов, предложений, времени чтения и многое другое.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>📊 Текст Анализатор Pro</h1>
+                <p class="subtitle">Полный анализ вашего текста в реальном времени</p>
+            </div>
+            <div class="theme-toggle">
+                <button id="theme-btn" aria-label="Переключить тему">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+        
+        <div class="content">
+            <div class="input-section">
+                <div class="input-header">
+                    <h2>Введите ваш текст</h2>
+                    <div class="text-actions">
+                        <button id="clear-btn" class="btn-secondary">Очистить</button>
+                        <button id="paste-btn" class="btn-secondary">Вставить</button>
+                        <button id="example-btn" class="btn-secondary">Пример</button>
+                    </div>
+                </div>
+                <textarea 
+                    id="text-input" 
+                    placeholder="Введите или вставьте ваш текст здесь... Начните печатать, и статистика будет обновляться автоматически!"
+                    aria-label="Поле для ввода текста"
+                ></textarea>
+                <div class="input-footer">
+                    <span class="hint">💡 Совет: Используйте Ctrl+A чтобы выделить весь текст</span>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card" data-category="words">
+                    <div class="stat-icon">📝</div>
+                    <div class="stat-value" id="word-count">0</div>
+                    <div class="stat-label">Слов</div>
+                    <div class="stat-trend" id="word-trend"></div>
+                </div>
+                <div class="stat-card" data-category="chars">
+                    <div class="stat-icon">🔤</div>
+                    <div class="stat-value" id="char-count">0</div>
+                    <div class="stat-label">Символов</div>
+                    <div class="stat-trend" id="char-trend"></div>
+                </div>
+                <div class="stat-card" data-category="chars-no-spaces">
+                    <div class="stat-icon">✂️</div>
+                    <div class="stat-value" id="char-no-spaces-count">0</div>
+                    <div class="stat-label">Без пробелов</div>
+                    <div class="stat-trend" id="chars-no-spaces-trend"></div>
+                </div>
+                <div class="stat-card" data-category="sentences">
+                    <div class="stat-icon">🔠</div>
+                    <div class="stat-value" id="sentence-count">0</div>
+                    <div class="stat-label">Предложений</div>
+                    <div class="stat-trend" id="sentence-trend"></div>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <h3>Прогресс заполнения</h3>
+                <div class="progress-bars">
+                    <div class="progress-item">
+                        <span>Плотность текста</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="density-progress" style="width: 0%"></div>
+                        </div>
+                        <span id="density-value">0%</span>
+                    </div>
+                    <div class="progress-item">
+                        <span>Заполнение</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="fill-progress" style="width: 0%"></div>
+                        </div>
+                        <span id="fill-value">0%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="details-section">
+                <h2>📈 Подробная статистика</h2>
+                <div class="details-grid">
+                    <div class="detail-group">
+                        <h3>Основные метрики</h3>
+                        <div class="detail-item">
+                            <span class="detail-label">Количество символов:</span>
+                            <span class="detail-value" id="detail-char-count">0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Количество символов (без пробелов):</span>
+                            <span class="detail-value" id="detail-char-no-spaces">0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Количество слов:</span>
+                            <span class="detail-value" id="detail-word-count">0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Количество предложений:</span>
+                            <span class="detail-value" id="detail-sentence-count">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-group">
+                        <h3>Дополнительные метрики</h3>
+                        <div class="detail-item">
+                            <span class="detail-label">Количество абзацев:</span>
+                            <span class="detail-value" id="paragraph-count">0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Средняя длина слова:</span>
+                            <span class="detail-value" id="avg-word-length">0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Средняя длина предложения:</span>
+                            <span class="detail-value" id="avg-sentence-length">0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Время чтения (прим.):</span>
+                            <span class="detail-value" id="reading-time">0 мин</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-section">
+                <h2>🎯 Дополнительные возможности</h2>
+                <div class="features-grid">
+                    <button id="keyword-btn" class="feature-btn">
+                        <span class="feature-icon">🔍</span>
+                        <span>Ключевые слова</span>
+                    </button>
+                    <button id="export-btn" class="feature-btn">
+                        <span class="feature-icon">📤</span>
+                        <span>Экспорт данных</span>
+                    </button>
+                    <button id="history-btn" class="feature-btn">
+                        <span class="feature-icon">🕒</span>
+                        <span>История анализа</span>
+                    </button>
+                    <button id="settings-btn" class="feature-btn">
+                        <span class="feature-icon">⚙️</span>
+                        <span>Настройки</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p>Текст Анализатор Pro &copy; 2025 | Сделано с ❤️ для всех, кто работает с текстом</p>
+            <div class="footer-links">
+                <a href="#" id="privacy-link">Конфиденциальность</a>
+                <a href="#" id="feedback-link">Обратная связь</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальные окна -->
+    <div id="keyword-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Ключевые слова</h3>
+            <div id="keyword-list" class="keyword-list"></div>
+        </div>
+    </div>
+
+    <div id="export-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Экспорт данных</h3>
+            <div class="export-options">
+                <button id="export-json" class="export-btn">JSON</button>
+                <button id="export-csv" class="export-btn">CSV</button>
+                <button id="export-txt" class="export-btn">TXT</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>
