@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEMONSTRATEAB</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>DEMONSTRATEAB</h1>
+            <p class="subtitle">Сделай красивые выражения используя синтаксис LaTeX</p>
+        </header>
+        
+        <div class="app-container">
+            <div class="input-panel">
+                <h2 class="panel-title">Ввод выражения</h2>
+                <textarea id="mathInput" placeholder="Введите выражение в формате LaTeX или простом формате. Используйте Enter для новой строки" rows="4"></textarea>
+                
+                <div class="button-group">
+                    <button id="renderBtn">Преобразовать</button>
+                    <button id="convertBtn">Автоконвертация</button>
+                    <button id="downloadBtn">Скачать картинку</button>
+                    <button id="openDocs">Открыть документацию</button>
+                </div>
+                
+                <div class="examples">
+                    <h3>Примеры выражений:</h3>
+                    <div class="example-item" data-expr="\frac{x+y}{b+n}">Дробь</div>
+                    <div class="example-item" data-expr="\frac{x+y}{b+n} \cdot \frac{a+b}{c+d}">Множественные дроби</div>
+                    <div class="example-item" data-expr="\sqrt{x^2 + y^2}">Корень и степени</div>
+                    <div class="example-item" data-expr="\int_{0}^{\infty} e^{-x^2} dx">Интеграл</div>
+                    <div class="example-item" data-expr="\sum_{n=1}^{\infty} \frac{1}{n^2}">Сумма ряда</div>
+                </div>
+            </div>
+            
+            <div class="output-panel">
+                <h2 class="panel-title">Результат</h2>
+                <div id="mathContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="docsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="docs-content">
+                <h2>Документация по математическим выражениям</h2>
+                
+                <div class="docs-section">
+                    <h3>LaTeX формат</h3>
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th>Элемент</th>
+                                <th>LaTeX синтаксис</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Дробь</td>
+                                <td>\frac{числитель}{знаменатель}</td>
+                                <td>\frac{a+b}{c+d}</td>
+                            </tr>
+                            <tr>
+                                <td>Квадратный корень</td>
+                                <td>\sqrt{выражение}</td>
+                                <td>\sqrt{x^2 + 1}</td>
+                            </tr>
+                            <tr>
+                                <td>Степень</td>
+                                <td>основание^{показатель}</td>
+                                <td>x^{2}</td>
+                            </tr>
+                            <tr>
+                                <td>Индекс</td>
+                                <td>основание_{индекс}</td>
+                                <td>x_{1}</td>
+                            </tr>
+                            <tr>
+                                <td>Интеграл</td>
+                                <td>\int_{низ}^{верх}</td>
+                                <td>\int_{0}^{1} x dx</td>
+                            </tr>
+                            <tr>
+                                <td>Сумма</td>
+                                <td>\sum_{низ}^{верх}</td>
+                                <td>\sum_{n=1}^{\infty}</td>
+                            </tr>
+                            <tr>
+                                <td>Греческие буквы</td>
+                                <td>\alpha, \beta, \gamma</td>
+                                <td>\alpha + \beta = \gamma</td>
+                            </tr>
+                            <tr>
+                                <td>Тригонометрия</td>
+                                <td>\sin, \cos, \tan</td>
+                                <td>\sin(\pi)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="docs-section">
+                    <h3>Простой формат (автоконвертация)</h3>
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th>Элемент</th>
+                                <th>Простой синтаксис</th>
+                                <th>Преобразуется в</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Дробь</td>
+                                <td>(a+b)/(c+d)</td>
+                                <td>\frac{a+b}{c+d}</td>
+                            </tr>
+                            <tr>
+                                <td>Умножение</td>
+                                <td>a * b</td>
+                                <td>a \cdot b</td>
+                            </tr>
+                            <tr>
+                                <td>Степень</td>
+                                <td>x^2</td>
+                                <td>x^{2}</td>
+                            </tr>
+                            <tr>
+                                <td>Индекс</td>
+                                <td>x_1</td>
+                                <td>x_{1}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="docs-section">
+                    <h3>Советы по использованию</h3>
+                    <ul class="docs-tips">
+                        <li>Используйте кнопку "Автоконвертация" для преобразования простого формата в LaTeX</li>
+                        <li>Для сложных выражений рекомендуется использовать LaTeX синтаксис</li>
+                        <li>Вы можете скачать результат как изображение PNG</li>
+                        <li>Кликните на примеры выражений для быстрой вставки</li>
+                        <li>Нажимайте Enter для преобразования выражения</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

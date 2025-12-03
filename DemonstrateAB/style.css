@@ -1,0 +1,303 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #333;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+h1 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.app-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.input-panel, .output-panel {
+    flex: 1;
+    min-width: 300px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    padding: 25px;
+    transition: transform 0.3s ease;
+}
+
+.input-panel:hover, .output-panel:hover {
+    transform: translateY(-5px);
+}
+
+.panel-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #2575fc;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+#mathInput {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    transition: border 0.3s;
+}
+
+#mathInput:focus {
+    border-color: #2575fc;
+    outline: none;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    background: #2575fc;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 140px;
+}
+
+button:hover {
+    background: #1a68e0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+#openDocs {
+    background: #6a11cb;
+}
+
+#openDocs:hover {
+    background: #5809b5;
+}
+
+.examples {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.examples h3 {
+    margin-bottom: 10px;
+    color: #2575fc;
+}
+
+.example-item {
+    padding: 8px;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.example-item:hover {
+    background: #e9ecef;
+}
+
+.example-item:last-child {
+    border-bottom: none;
+}
+
+#mathContainer {
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    background: #f8f9fa;
+    font-size: 24px;
+}
+
+.MathJax {
+    font-size: 1.5em !important;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    border-radius: 15px;
+    padding: 30px;
+    overflow-y: auto;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #6c757d;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: #495057;
+}
+
+.docs-section {
+    margin-bottom: 30px;
+}
+
+.docs-section h2 {
+    color: #2575fc;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.docs-section h3 {
+    color: #6a11cb;
+    margin-bottom: 15px;
+}
+
+.docs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+.docs-table th, .docs-table td {
+    border: 1px solid #dee2e6;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.docs-table th {
+    background: #2575fc;
+    color: white;
+}
+
+.docs-table tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.docs-tips {
+    padding-left: 20px;
+}
+
+.docs-tips li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+}
+/* Стили для расширяемого контейнера вывода */
+#mathContainer {
+    min-height: 200px;
+    max-height: 600px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: 2px dashed #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    background: #f8f9fa;
+    font-size: 24px;
+}
+
+/* Стили для многострочных выражений */
+.math-expression {
+    margin: 10px 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* Стили для textarea */
+#mathInput {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    transition: border 0.3s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    resize: vertical;
+    min-height: 100px;
+}
+
+#mathInput:focus {
+    border-color: #2575fc;
+    outline: none;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    #mathContainer {
+        max-height: 400px;
+    }
+}
