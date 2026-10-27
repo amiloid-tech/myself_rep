@@ -1,1 +1,0 @@
-gcc -Wall -Wextra -std=c11 main.c io.c commands.c variables.c -o sosi
